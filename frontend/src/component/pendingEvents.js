@@ -78,12 +78,17 @@ function PendingEvents(){
             {pendingEventsFlag?  (pendingEvents.map(((eventValues)=>(
 
                 <div>
-                    <h1>{eventValues.eventName}</h1>
-                    <p>{eventValues.eventDescription}</p>
-                    <h4>Organized By : {eventValues.organizerName}</h4>
-                    <h1>Venue: {eventValues.venue}</h1>
-                    <h2>Date: {eventValues.fromDateTime.getDate()===eventValues.toDateTime.getDate() ? `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()}` : `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()} To ${eventValues.toDateTime.getDate()}-${eventValues.toDateTime.getMonth()}-${eventValues.toDateTime.getFullYear()}`}</h2>
-                    <h2>Timings: {eventValues.fromDateTime.getHours().toString().length!==2 ? "0"+eventValues.fromDateTime.getHours():eventValues.fromDateTime.getHours()}
+                    <br />
+                    <h1 style={{textAlign:"center"}}>{eventValues.eventName}</h1>
+                    
+                    <p><h5><strong> Description</strong></h5>{eventValues.eventDescription}</p>
+                    <div style={{display:"flex",justifyContent:"center"}}>
+                        <img style={{maxWidth:"500px",maxHeight:"500px"}} src={`${eventValues.image}`} alt={`${eventValues.eventName}`} />
+                    </div>
+                    <p><h5><strong>Organized By</strong></h5>{eventValues.organizerName} </p>
+                    <p><h5><strong>Venue</strong> </h5>{eventValues.venue}  </p>
+                    <p><h5><strong>Date</strong></h5>{eventValues.fromDateTime.getDate()===eventValues.toDateTime.getDate() ? `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()}` : `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()} To ${eventValues.toDateTime.getDate()}-${eventValues.toDateTime.getMonth()}-${eventValues.toDateTime.getFullYear()}`} </p>
+                    <p><h5><strong>Timings</strong></h5> {eventValues.fromDateTime.getHours().toString().length!==2 ? "0"+eventValues.fromDateTime.getHours():eventValues.fromDateTime.getHours()}
                         :{eventValues.fromDateTime.getMinutes().toString().length!==2 ? "0"+eventValues.fromDateTime.getMinutes():eventValues.fromDateTime.getMinutes()}
                         
                         {eventValues.fromDateTime.getHours()>=12 ?"PM":"AM"} {"To "}  
@@ -91,19 +96,28 @@ function PendingEvents(){
                         {eventValues.toDateTime.getHours().toString().length!==2 ? "0"+eventValues.toDateTime.getHours():eventValues.toDateTime.getHours()}
                         :{eventValues.toDateTime.getMinutes().toString().length!==2 ? "0"+eventValues.toDateTime.getMinutes():eventValues.toDateTime.getMinutes()}
                         
-                        {eventValues.toDateTime.getHours()>=12 ?"PM":"AM"} 
+                        {eventValues.toDateTime.getHours()>=12 ?"PM":"AM"}</p>
 
-                        </h2>
-                    <h1>No.of People Estimated: {eventValues.noOfPeopleEstimated}</h1>
-
-                    <button onClick={()=>acceptEvent(eventValues._id,eventValues.organizerEmail)}>Accept</button>
-                    <button onClick={()=>rejectEvent(eventValues._id,eventValues.organizerEmail)}>Reject</button>
+                    <div style={{display:"flex",justifyContent:"center"}}>
+                        <button style={{margin:"5px"}} className="btn btn-primary" onClick={()=>acceptEvent(eventValues._id,eventValues.organizerEmail)}>Accept</button>
+                        <button style={{margin:"5px"}} className="btn btn-primary" onClick={()=>rejectEvent(eventValues._id,eventValues.organizerEmail)}>Reject</button>
+                    </div>
                 </div>
             ))))
                 :
                 "No Pending Events"
                 }
             
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
     );
 }

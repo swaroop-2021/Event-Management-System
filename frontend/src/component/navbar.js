@@ -24,7 +24,7 @@ function Navigationbar () {
 	
     
     return <div>
-        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossOrigin='anonymous'></script>
         <Navbar bg="light" variant="light" sticky="top" style={{paddingRight:15}} >
       <LinkContainer to="/">
         <Navbar.Brand><img src={bgImage} alt="kletech" style={{height:60,marginLeft:15}}/></Navbar.Brand>
@@ -38,9 +38,6 @@ function Navigationbar () {
           <LinkContainer to="/events">
             <Nav.Link>Events</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/about">
-            <Nav.Link>About us</Nav.Link>
-          </LinkContainer>
           {
                         flag?
                         <>
@@ -50,7 +47,10 @@ function Navigationbar () {
                    
                         </> 
                         :
-                        <LinkContainer to="/login"><Nav.Link>Login</Nav.Link></LinkContainer>
+                        <>
+                          <LinkContainer to="/login"><Nav.Link>Login</Nav.Link></LinkContainer>
+                          <LinkContainer to="/signup"><Nav.Link>SignUp</Nav.Link></LinkContainer>
+                        </>
                         }
         </Nav>
       </Navbar.Collapse>

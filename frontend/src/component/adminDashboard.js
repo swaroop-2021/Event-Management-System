@@ -137,6 +137,15 @@ function AdminDashboard () {
             </MDBCol>
           </MDBRow>
           <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
     );
   }

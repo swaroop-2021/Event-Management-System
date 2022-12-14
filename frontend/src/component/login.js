@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import validator from "validator";
 import "./login.css";
 import {
-    MDBBtn,
     MDBContainer,
     MDBCard,
     MDBCardBody,
@@ -96,9 +95,11 @@ function Login (){
         <>  <MDBContainer className="my-5">
                 
                 <MDBCard>
-                <MDBRow className='g-3'>
-                <div className="h1 p-3 mb-2 bg-primary text-white"><marquee>WELCOME TO KLE TECH EVENT MANAGEMENT PORTAL</marquee></div>
-                <span className="border border-warning"></span>
+                <MDBRow className='g-2'>
+                    <div className='d-flex flex-row mt-2'>
+                        <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }}/>
+                        <span className="h1 fw-bold" alignment='center'>Login Form </span>
+                    </div>
 
                     <MDBCol md='6'>
                     <MDBCardImage src={bgImage} style={{height:450,width:20}} alt="login form" className='rounded-start w-100'/>
@@ -121,12 +122,6 @@ function Login (){
                     <button className="mb-4 px-5 btn btn-primary" color='blue' size='lg' id="submit" onClick={submitDeatils}>Login</button>
                     <p id="invalid_log">{authMessage}</p>
                     
-                    
-
-                    <div className='d-flex flex-row justify-content-start'>
-                    <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                    <a href="#!" className="small text-muted">Privacy policy</a>
-                    </div>
                 </MDBCol>
 
                 </MDBRow>

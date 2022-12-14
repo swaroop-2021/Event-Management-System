@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import validator from "validator";
-import DateTimePicker from 'react-datetime-picker';
 import { useEffect } from 'react';
 import authService from '../services/auth.service';
 import {useNavigate } from 'react-router-dom';
 import {
-    MDBBtn,
     MDBContainer,
     MDBCard,
     MDBCardBody,
-    MDBCardImage,
     MDBRow,
     MDBCol,
     MDBIcon,
@@ -238,9 +235,13 @@ function EventRegistration () {
         else{
             setNoOfPeopleEstimatedError("");
         }
+        if(values.fromDate>=values.toDate){
+            setFromDateError("");
+        }
+        else{
+            setFromDateError("From Date should be less then To Date");
+        }
 
-
-        
         if(!eventNameError && !coordinatorNameError && !coordinatorEmailError && !coordinatorNumberError && !guestNameError && !eventDescriptionError && !venueError && !noOfPeopleEstimatedError){
                 console.log(values);
                 console.log(new Date(values.fromDate+"T"+values.fromTime))
@@ -283,95 +284,14 @@ function EventRegistration () {
 
     useEffect(()=>{
         authService.refreshPage();
-        // if(!authService.getToken() && !authService.getCurrentUser()){
-        //     if(authService.getCurrentUser().type==="user")
-        //         navigate("/");
-        // }
+        if(authService.getCurrentUser()){
+            if(authService.getCurrentUser().type==="user")
+                navigate("/"); 
+        }
     },[])
 
 	return(
         <>
-        {/* <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
-        <title>Responsive Regisration Form </title>
-        <div className="container">
-            <header>Event Registration</header>
-            <form onSubmit={submitDeatils}>
-                <div className="form first">
-                    <div className="details personal">
-                    <span className="title">Event Details</span>
-                    <div className="fields">
-                        <div className="input-field">
-                        <label htmlFor='eventName'>Name of the Event</label>
-                        <input type="text" name="eventName" required value={values.eventName} onChange={handleEventNameInputChange}/>
-                        <span>{eventNameError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label htmlFor="fromDateTime"></label>
-                        <DateTimePicker name='fromDateTime' value={values.fromDateTime}  onChange={handleFromDateTimeInputChange} />
-                        <span>{fromDateTimeError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label htmlFor="toDateTime"></label>
-                        <DateTimePicker name='toDateTime' value={values.toDateTime}  onChange={handleToDateTimeInputChange} />
-                        <span>{toDateTimeError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Co-ordinator Name</label>
-                        <input type="text" value={values.coordinatorName} onChange={handleCoordinatorNameInputChange}  required />
-                        <span>{coordinatorNameError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Event Description</label>
-                        <textarea value={values.eventDescription} onChange={handleEventDescriptionInputChange}  required />
-                        <span>{eventDescriptionError}</span>
-                        </div>
-                        <div>
-                        <label>Co-ordinator mail</label>
-                        <input type="text" value={values.coordinatorEmail} onChange={handleCoordinatorEmailInputChange} required />
-                        <span>{coordinatorEmailError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Co-ordinator Mobile Number</label>
-                        <input type="number" value={values.coordinatorNumber} onChange={handleCoordinatorNumberInputChange} required />
-                        <span>{coordinatorNumberError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Target Audience</label>
-                        <input type="number" value={values.noOfPeopleEstimated} onChange={handleNoOfPeopleEstimatedInputChange}  required />
-                        <span>{noOfPeopleEstimatedError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Event Type</label>
-                        <input type="text" value={values.eventType} onChange={handleEventTypeInputChange} required />
-                        <span>{eventTypeError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Venue</label>
-                        <input type="text" value={values.venue} onChange={handleVenueInputChange} required />
-                        <span>{venueError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Guest Name</label>
-                        <input type="text" value={values.guestName} onChange={handleguestNameInputChange} required />
-                        <span>{guestNameError}</span>
-                        </div>
-                        <div className="input-field">
-                        <label>Poster</label>
-                        <input type="file" onChange={handleImageInputChange} required />
-                        <span>{imageError}</span>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="buttons">
-                    <button className="sumbit" type='submit' >
-                        <span className="btnText">Submit</span>
-                        <i className="uil uil-navigator" />
-                    </button>
-                    </div>
-                </div>
-            </form>
-        </div> */}
-
 
         <MDBContainer className="my-5">
                 

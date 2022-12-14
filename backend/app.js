@@ -127,7 +127,7 @@ app.post("/register",(req,res,next)=>{
           bcrypt.hash(values.password, 10, (error, hash) => {
             if (error) res.status(500).json({ error });
             else {
-                const userTypes=["user","organizer"];
+                const userTypes=["user","organizer","admin"];
                 if(!userTypes.includes(values.userType)){
                     res.status(400).json({message:"Invalid UserType"});
                 }else{
@@ -144,29 +144,30 @@ app.post("/register",(req,res,next)=>{
                         department:values.department,
                         userType:values.userType
                     });
+            
                     user.save(user)
                         .then(response=>{
                             console.log("saved");
-                            // let transporter = nodemailer.createTransport({
-                            //     service: "gmail",
-                            //     port: 587,
-                            //     secure: false, // true for 465, false for other ports
-                            //     auth: {
-                            //       user: "", 
-                            //       pass: "", 
-                            //     },
-                            //   });
+                            let transporter = nodemailer.createTransport({
+                                service: "gmail",
+                                port: 587,
+                                secure: false, // true for 465, false for other ports
+                                auth: {
+                                  user: "01fe20bcs108@kletech.ac.in",
+                                  pass: "Swaroop@2001",
+                                },
+                              });
             
-                            //   transporter
-                            //     .sendMail({
-                            //       from: "01fe20bcs108@kletech.ac.in",
-                            //       to: `${values.email}`,
-                            //       subject: "Welcome to KLE Tech Management System",
-                            //       text: `Hello Dear ${values.email}`,
-                            //       html: `<b>Hello Dear User, we are happy that you join our family. Kind Regards, iCinema Team.</b>`,
-                            //     })
-                            //     .then((info) => console.log("Email has been sent!"))
-                            //     .catch((err) => console.log(err));
+                              transporter
+                                .sendMail({
+                                  from: "01fe20bcs108@kletech.ac.in",
+                                  to: `${values.email}`,
+                                  subject: "Welcome to KLE Tech Event Management System",
+                                  text: `Hello Dear ${values.name}`,
+                                  html: `<b>Hello Dear User, we are happy that you join our Website. Kind Regards, KLE Tech Event Management System.</b>`,
+                                })
+                                .then((info) => console.log("Email has been sent!"))
+                                .catch((err) => console.log(err));
                             res.status(201).json({
                                 message: "Signed Up Successfully",
                                 user,
@@ -182,10 +183,11 @@ app.post("/register",(req,res,next)=>{
 })
 
 app.get("/upcomingEvents",(req,res,next)=>{
-    const nowDate=new Date();
-    eventDb.find({"status":"accepted","fromDateTime":{$gt:nowDate}})
+    const nowDate=new Date().toISOString();
+    console.log(nowDate);
+    eventDb.find({"status":"accepted",fromDateTime:{$lt:nowDate},toDateTime:{$lt:nowDate}})
         .then(data=>{
-            console.log(data);
+            console.log(1,data);
             if(data.length!==0){
                 res.status(200).json({message:"Success",data:data});
             }
@@ -196,10 +198,11 @@ app.get("/upcomingEvents",(req,res,next)=>{
 })
 
 app.get("/previousEvents",(req,res,next)=>{
-    const nowDate=new Date();
-    eventDb.find({"status":"accepted",toDateTime:{$lt:nowDate}})
+    const nowDate=new Date().toISOString();
+    console.log(nowDate);
+    eventDb.find({"status":"accepted",fromDateTime:{$gt:nowDate},toDateTime:{$gt:nowDate}})
         .then(data=>{
-            console.log(data);
+            console.log(2,data);
             if(data.length!==0){
                 res.status(200).json({message:"Success",data:data});
             }

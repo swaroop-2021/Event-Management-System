@@ -18,7 +18,8 @@ function EventInfo(){
         toDateTime:new Date(),
         registerFlag:false,
         upcomingFlag:false,
-        organizedFlag:false
+        organizedFlag:false,
+        image:""
     });
 
     useEffect(()=>{
@@ -40,6 +41,7 @@ function EventInfo(){
                         noOfPeopleEstimated:data.event.noOfPeopleEstimated,
                         organizerEmail:data.event.organizerEmail,
                         organizerName:data.event.organizerName,
+                        image:data.event.image,
                         toDateTime:new Date(data.event.toDateTime),
                         fromDateTime:new Date(data.event.fromDateTime)}));
                         // console.log(eventValues.toDateTime);
@@ -154,23 +156,26 @@ function EventInfo(){
     
     return(
         <div className='container'>
-            <h1><marquee>{eventValues.eventName}</marquee></h1>
-            <p>{eventValues.eventDescription}</p>
-            <p>Organized By : {eventValues.organizerName}</p>
-            <p>Venue: {eventValues.venue}</p>
-            <p>Date: {eventValues.fromDateTime.getDate()===eventValues.toDateTime.getDate() ? `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()}` : `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()} To ${eventValues.toDateTime.getDate()}-${eventValues.toDateTime.getMonth()}-${eventValues.toDateTime.getFullYear()}`}</p>
-            <p>Timings: {eventValues.fromDateTime.getHours().toString().length!==2 ? "0"+eventValues.fromDateTime.getHours():eventValues.fromDateTime.getHours()}
-                :{eventValues.fromDateTime.getMinutes().toString().length!==2 ? "0"+eventValues.fromDateTime.getMinutes():eventValues.fromDateTime.getMinutes()}
                 
-                {eventValues.fromDateTime.getHours()>=12 ?"PM":"AM"} {"To "}  
-                
-                {eventValues.toDateTime.getHours().toString().length!==2 ? "0"+eventValues.toDateTime.getHours():eventValues.toDateTime.getHours()}
-                :{eventValues.toDateTime.getMinutes().toString().length!==2 ? "0"+eventValues.toDateTime.getMinutes():eventValues.toDateTime.getMinutes()}
-                
-                {eventValues.toDateTime.getHours()>=12 ?"PM":"AM"} 
-
-                </p>
-            <p>No.of People Estimated: {eventValues.noOfPeopleEstimated}</p>
+                    <br />
+                    <h1 style={{textAlign:"center"}}>{eventValues.eventName}</h1>
+                    
+                    <p><h5><strong> Description</strong></h5>{eventValues.eventDescription}</p>
+                    <div style={{display:"flex",justifyContent:"center"}}>
+                        <img style={{maxWidth:"500px",maxHeight:"500px"}} src={`${eventValues.image}`} alt={`${eventValues.eventName}`} />
+                    </div>
+                    <p><h5><strong>Organized By</strong></h5>{eventValues.organizerName} </p>
+                    <p><h5><strong>Venue</strong> </h5>{eventValues.venue}  </p>
+                    <p><h5><strong>Date</strong></h5>{eventValues.fromDateTime.getDate()===eventValues.toDateTime.getDate() ? `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()}` : `${eventValues.fromDateTime.getDate()}-${eventValues.fromDateTime.getMonth()}-${eventValues.fromDateTime.getFullYear()} To ${eventValues.toDateTime.getDate()}-${eventValues.toDateTime.getMonth()}-${eventValues.toDateTime.getFullYear()}`} </p>
+                    <p><h5><strong>Timings</strong></h5> {eventValues.fromDateTime.getHours().toString().length!==2 ? "0"+eventValues.fromDateTime.getHours():eventValues.fromDateTime.getHours()}
+                        :{eventValues.fromDateTime.getMinutes().toString().length!==2 ? "0"+eventValues.fromDateTime.getMinutes():eventValues.fromDateTime.getMinutes()}
+                        
+                        {eventValues.fromDateTime.getHours()>=12 ?"PM":"AM"} {"To "}  
+                        
+                        {eventValues.toDateTime.getHours().toString().length!==2 ? "0"+eventValues.toDateTime.getHours():eventValues.toDateTime.getHours()}
+                        :{eventValues.toDateTime.getMinutes().toString().length!==2 ? "0"+eventValues.toDateTime.getMinutes():eventValues.toDateTime.getMinutes()}
+                        
+                        {eventValues.toDateTime.getHours()>=12 ?"PM":"AM"}</p>
 
             {eventValues.organizedFlag?
             
@@ -179,7 +184,7 @@ function EventInfo(){
                 
                     <>
                         
-                        <button onClick={deleteEvent}>Delete</button>
+                        <button style={{margin:"5px"}} className="btn btn-primary" onClick={deleteEvent}>Delete</button>
                     </>
                 :
                 
@@ -195,17 +200,17 @@ function EventInfo(){
                 {eventValues.upcomingFlag?
                 <>
                     {!eventValues.registerFlag ?
-                        <button onClick={registerEvent}>Register</button>
+                        <button style={{margin:"5px"}} className="btn btn-primary" onClick={registerEvent}>Register</button>
                     :
-                        <button onClick={deRegisterEvent}>DeRegister</button>
+                        <button style={{margin:"5px"}} className="btn btn-primary" onClick={deRegisterEvent}>DeRegister</button>
                     }
                 </>
             :
                 <>
                     {eventValues.registerFlag ?
-                            <button type='disabled'>Registered</button>
+                            <button style={{margin:"5px"}} className="btn btn-primary" type='disabled'>Registered</button>
                     :
-                            <button type='disabled'>Not Registered</button>
+                            <button style={{margin:"5px"}} className="btn btn-primary" type='disabled'>Not Registered</button>
                     }
                 </>
             }

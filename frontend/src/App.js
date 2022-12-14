@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Home from './component/home';
-import About from './component/about';
 import Login from './component/login';
 import Event from './component/events';
 import EventInfo from './component/eventInfo';
@@ -37,12 +36,11 @@ render() {
     
     
     <Router>
-      <div className="App">
+      <div className="App" style={{height: "calc(100%-60px)"}}>
         
         <Navigationbar></Navigationbar>
         <Routes>
           <Route exact path='/' element={<Home />}></Route>
-          <Route exact path='/about' element={<About />}></Route>
           <Route exact path='/events' element={<Event />}></Route>
           <Route exact path='/login' element={<Login />}></Route>
           <Route exact path='/logout' element={<Logout />}></Route>
@@ -67,29 +65,30 @@ render() {
               </ul>
             </div>
             <div className="col-sm-3">
-              <h5>About us</h5>
+              <h5>Portals</h5>
               <ul>
-                <li><Link to="/">Company Information</Link></li>
-                <li><Link to="/">Contact Us</Link></li>
-                <li><Link to="/">Reviews</Link></li>
+                <li><a href='https://parents.kletech.ac.in/'>Parents Portal</a></li>
+                <li><a href='https://student.kletech.ac.in/'>Students Portal</a></li>
+                <li><a href='https://staff.kletech.ac.in/staff/webfiles/'>Faculty Portal</a></li>
               </ul>
             </div>
             <div className="col-sm-3">
-              <h5>Support</h5>
+              <h5>Visit</h5>
               <ul>
-                <li><Link to="/">FAQ</Link></li>
-                <li><Link to="/">Help desk</Link></li>
-                <li><Link to="/">Forums</Link></li>
+                <li><a href='https://cse.kletech.ac.in/'>CSE Dept Portal</a></li>
+                <li><a href='https://kletech.ac.in'>KLE Tech Portal</a></li>
+                <li><a href='https://www.klesociety.org/'>KLE Society</a></li>
               </ul>
             </div>
             <div className="col-sm-3">
-              <h5>Legal</h5>
+              <h5>Connect Us</h5>
               <ul>
-                <li><Link to="#">Terms of Service</Link></li>
-                <li><Link to="#">Terms of Use</Link></li>
-                <li><Link to="#">Privacy Policy</Link></li>
+                <li><a href='https://twitter.com/KLETechbvb'>Twitter</a></li>
+                <li><a href='https://www.linkedin.com/school/kletechbvb/'>LinkedIn</a></li>
+                <li><a href='https://www.youtube.com/c/KLETechnologicalUniversity'>YouTube</a></li>
               </ul>
             </div>
+            
           </div>
         </div>
         <div className="footer-copyright">

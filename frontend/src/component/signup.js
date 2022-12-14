@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import validator from "validator";
-
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router-dom";
 import {
-    MDBBtn,
     MDBContainer,
     MDBCard,
     MDBCardBody,
-    MDBCardImage,
     MDBRow,
     MDBCol,
     MDBIcon,
@@ -241,7 +240,7 @@ function Signup () {
         
         <div className='d-flex flex-row mt-2'>
             <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }}/>
-            <span className="h1 fw-bold" alignment='center'>       Registration Form </span>
+            <span className="h1 fw-bold" alignment='center'>Registration Form </span>
         </div>
 
 
@@ -253,6 +252,27 @@ function Signup () {
 
         <MDBInput wrapperClass='shadow p-3 mb-5 bg-body rounded' placeholder='Gender' id='gender' type='text' size="lg" required value={values.gender} onChange={handleGenderInputChange} />
         <small>{genderError}</small>
+
+
+        {/* <div style={{display:"flex"}}>
+
+            <div>
+                <DropdownButton size="lg" id="dropdown-basic-button" title="Gender">
+                    <Dropdown.Item eventKey="1">male</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">female</Dropdown.Item>
+                </DropdownButton>
+            </div>
+
+            <div>
+                <DropdownButton size="lg" id="dropdown-basic-button" title="User Type">
+                    <Dropdown.Item  evetKey="1">user</Dropdown.Item>
+                    <Dropdown.Item  evetKey="2">organizer</Dropdown.Item>
+                </DropdownButton>
+            </div>
+        </div>
+
+        <br /> */}
+
 
         <MDBInput wrapperClass='shadow p-3 mb-5 bg-body rounded' placeholder='Mobile Number' id='number' type='number' size="lg" required  onChange={handlePhoneNumberInputChange}/>
         <small>{phonenumberError}</small>

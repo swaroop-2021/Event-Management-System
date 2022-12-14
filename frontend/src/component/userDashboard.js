@@ -177,6 +177,15 @@ function UserDashboard () {
             </MDBCol>
           </MDBRow>
           <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
     );
   }
