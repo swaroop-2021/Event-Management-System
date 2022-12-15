@@ -117,10 +117,6 @@ function OrganizerDashboard () {
                 }
           })
           .catch(err=>console.log(err));
-      
-          
-
-
         }
       })
 

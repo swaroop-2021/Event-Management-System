@@ -62,8 +62,8 @@ function PendingEvents(){
               }
         }).then(res=> {return res.json()})
         .then(data=>{
-            console.log(data);
-            if(data.message==="accepted"){
+            console.log(data.message);
+            if(data.message==="Accepted"){
                 alert(data.message);
             }
             else{

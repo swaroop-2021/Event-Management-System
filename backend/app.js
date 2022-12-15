@@ -185,7 +185,7 @@ app.post("/register",(req,res,next)=>{
 app.get("/upcomingEvents",(req,res,next)=>{
     const nowDate=new Date().toISOString();
     console.log(nowDate);
-    eventDb.find({"status":"accepted",fromDateTime:{$lt:nowDate},toDateTime:{$lt:nowDate}})
+    eventDb.find({"status":"accepted",fromDateTime:{$gt:nowDate},toDateTime:{$gt:nowDate}})
         .then(data=>{
             console.log(1,data);
             if(data.length!==0){
@@ -200,7 +200,7 @@ app.get("/upcomingEvents",(req,res,next)=>{
 app.get("/previousEvents",(req,res,next)=>{
     const nowDate=new Date().toISOString();
     console.log(nowDate);
-    eventDb.find({"status":"accepted",fromDateTime:{$gt:nowDate},toDateTime:{$gt:nowDate}})
+    eventDb.find({"status":"accepted",fromDateTime:{$lt:nowDate},toDateTime:{$lt:nowDate}})
         .then(data=>{
             console.log(2,data);
             if(data.length!==0){
@@ -276,12 +276,17 @@ app.post("/getPendingEvents",(req,res,next)=>{
 
 
 app.post("/acceptEvent",(req,res,next)=>{
-    const {id,email}=req.body;
+    const {id}=req.body;
     eventDb.update({id:id},{$set:{"status":"accepted"}})
         .then(ress=>{
-            userDb.updateOne({email:email},{$push:{"organizedEventIds":id}})
-                .then(ress=>{
-                    res.status(200).json({message:"Accepted"});
+            eventDb.findOne({id:id})
+                .then(data=>{
+                    console.log(data);
+                    userDb.update({email:data.organizerEmail},{$push:{organizedEventIds:id}})
+                        .then(ress=>{
+                            console.log(ress);
+                            res.status(200).json({message:"Accepted"});
+                        })
                 })
         })
         .catch(err=>{throw err})
