@@ -154,7 +154,7 @@ app.post("/register",(req,res,next)=>{
                                 secure: false, // true for 465, false for other ports
                                 auth: {
                                   user: "01fe20bcs108@kletech.ac.in",
-                                  pass: "Swaroop@2001",
+                                  pass: "Cdg$54eg7",
                                 },
                               });
             
